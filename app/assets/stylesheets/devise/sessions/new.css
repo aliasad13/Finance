@@ -1,0 +1,40 @@
+.login-card{
+    height: 65vh;
+    display: flex;
+    align-items: center;
+    width: 45%;
+    justify-content: space-around;
+    align-content: center;
+}
+
+.forgot-links{
+    display: flex;
+    justify-content: space-between;
+}
+
+.remember-me label{
+margin-left: 10px;
+}
+
+.login-card .card img{
+    height: -webkit-fill-available;
+    object-fit: contain;
+}
+
+.login-card .card{
+}
+
+.card figure{
+    flex: 1;
+
+
+}
+
+.card .card-body{
+    flex: 1;
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+}
