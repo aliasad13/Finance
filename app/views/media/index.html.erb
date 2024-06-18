@@ -1,0 +1,7 @@
+
+<h1>trending movies</h1>
+<ul>
+  <% @trending_movies.each do |tv_show| %>
+    <li><%= tv_show["original_title"] %></li>
+  <% end %>
+</ul>

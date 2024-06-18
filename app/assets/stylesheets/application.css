@@ -15,7 +15,14 @@
  */
 .alert-dismissible{
     position: absolute;
-    top: 68px;
+    top: 10%;
+}
+
+.carousel-item {
+    display: none;
+}
+.carousel-item.active {
+    display: block;
 }
 
 @keyframes slideUp {
@@ -34,6 +41,7 @@
 }
 
 .navbar{
+    height: 10%;
     position: fixed;
     z-index: 1000;
     top: 0;
@@ -43,6 +51,7 @@
 .btn-primary{
     background-color: #1d6790;
     border: none;
+    border-radius: 12px;
 }
 
 .input:focus, .input:focus-within {

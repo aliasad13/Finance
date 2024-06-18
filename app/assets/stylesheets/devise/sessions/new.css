@@ -18,7 +18,8 @@ margin-left: 10px;
 
 .login-card .card img{
     height: -webkit-fill-available;
-    object-fit: contain;
+    object-fit: cover;
+
 }
 
 .login-card .card{
@@ -26,8 +27,8 @@ margin-left: 10px;
 
 .card figure{
     flex: 1;
-
-
+    border-top-right-radius: 145px;
+    border-bottom-right-radius: 50px;
 }
 
 .card .card-body{
@@ -37,4 +38,5 @@ margin-left: 10px;
 .container{
     display: flex;
     justify-content: center;
+    margin-top: 9rem;
 }

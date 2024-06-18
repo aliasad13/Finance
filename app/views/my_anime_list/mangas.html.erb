@@ -1,0 +1,11 @@
+<h1>Manga List</h1>
+
+<% if @manga_list %>
+  <ul>
+    <% @manga_list.each do |manga| %>
+      <li><%= manga['node']['title'] %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No manga found.</p>
+<% end %>

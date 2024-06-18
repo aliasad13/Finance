@@ -5,11 +5,12 @@
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" /></svg>
       </div>
       <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-        <li><%= link_to "Home Page", root_path %></li>
         <% if user_signed_in? %>
           <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete, data: {confirm: "Are you sure"} %></li>
         <% else %>
         <li><%= link_to "Sign In", new_user_session_path %></li>
+          <li><%= link_to "Home Page", root_path %></li>
+
         <% end %>
           <li><a>Portfolio</a></li>
         <li><a>About</a></li>
@@ -17,7 +18,9 @@
     </div>
   </div>
   <div class="navbar-center">
-    <a class="btn btn-ghost text-xl">Finance Tracker</a>
+    <a class="btn btn-ghost text-xl" id="logo-container"><figure class="shadow-xl">
+      <%= image_tag 'site_logo.png', alt: 'Relax', class: 'your-css-class', id: 'site-log' %>
+    </figure></a>
   </div>
   <div class="navbar-end">
     <% if user_signed_in? %>

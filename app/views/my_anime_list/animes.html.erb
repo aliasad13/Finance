@@ -1,0 +1,11 @@
+<h1>Anime List</h1>
+
+<% if @anime_list %>
+  <ul>
+    <% @anime_list.each do |anime| %>
+      <li><%= anime['node']['title'] %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No anime found.</p>
+<% end %>

@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   def dark_mode
     #theme is set on application.html.erb => <html>
     if user_signed_in?
-      theme = params[:theme] == 'dark' ? 'dark' : 'light'
+      theme = params[:theme] == 'dark' ? 'dark' : 'garden'
       current_user.update(theme: theme)
       #To ensure that the user is redirected back to the page they
       #were on after setting the theme, you can use the request.referrer
@@ -17,6 +17,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  protected
 
+  def after_sign_in_path_for(resource)
+    movies_and_shows_path
+  end
 
 end

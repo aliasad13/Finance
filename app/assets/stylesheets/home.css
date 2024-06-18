@@ -1,0 +1,29 @@
+.min-h-screen{
+    min-height: 80vh;
+    border-radius: 13px;
+}
+
+.navbar{
+    background-color: black;
+    color: red;
+}
+#site-log{
+        zoom: .35;
+}
+.screen {
+    box-shadow: 0 0px 97px -30px aquamarine;
+    transition: box-shadow 0.3s ease; /* Smooth transition */
+}
+
+.screen.hovered {
+    box-shadow: 0 0px 97px 10px chocolate;
+}
+#logo-container{
+    height: fit-content;
+    width: fit-content;
+    display: flex;
+    align-content: center;
+}
+#site-log{
+        zoom: .35;
+}
