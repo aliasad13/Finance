@@ -1,7 +1,35 @@
 
-<h1>trending movies</h1>
-<ul>
-  <% @trending_movies.each do |tv_show| %>
-    <li><%= tv_show["original_title"] %></li>
+<% trending_movie = @trending_movies.first %>
+<% movie_poster_url = "https://image.tmdb.org/t/p/w500#{trending_movie["poster_path"]}" %>
+<% trending_tv = @trending_tv_shows.first %>
+<% tv_poster_url = "https://image.tmdb.org/t/p/w500#{trending_tv["poster_path"]}" %>
+
+
+<div class="movie-tv-wrapper flex space-x-4">
+  <%= link_to movies_media_path, class: "home-page-card-link" do %>
+    <div class="home-page-card card w-96 bg-base-100 shadow-xl image-full transform  duration-1000 hover:scale-105">
+      <figure>
+        <img src="<%= movie_poster_url %>" alt="Movies" />
+      </figure>
+      <div class="card-body">
+        <h2 class="card-title">MOVIES</h2>
+        <p>Find All About The Trending Movies</p>
+        <div class="card-actions justify-end"></div>
+      </div>
+    </div>
   <% end %>
-</ul>
+
+  <%= link_to tv_shows_media_path, class: "home-page-card-link" do %>
+    <div class="home-page-card card w-96 bg-base-100 shadow-xl image-full transform  duration-1000 hover:scale-105">
+      <figure>
+        <img src="<%= tv_poster_url %>" alt="TV Shows" />
+      </figure>
+      <div class="card-body">
+        <h2 class="card-title">TV SHOWS</h2>
+        <p>Find The Shows To Share With Your Friends And Family</p>
+        <div class="card-actions justify-end"></div>
+      </div>
+    </div>
+  <% end %>
+</div>
+

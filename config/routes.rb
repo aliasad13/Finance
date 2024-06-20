@@ -13,4 +13,15 @@ Rails.application.routes.draw do
   # root 'my_anime_list#index' # Or any other controller action you prefer
   # root 'my_anime_list#index' # Example: Set root to my_anime_list#index
   get 'movies_and_shows', to: 'media#index'
-end
+
+  resources 'media', only: [] do
+    collection do
+      get :movies
+      get :tv_shows
+    end
+    member do
+      get :movie
+    end
+  end
+
+  end

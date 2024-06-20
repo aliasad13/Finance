@@ -1,0 +1,76 @@
+.movie-card{
+    margin-bottom: 20px;
+}
+
+.bottom-card-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    align-content: center;
+}
+
+.min-h-screen{
+    min-height: 80vh;
+    border-radius: 13px;
+}
+
+.navbar{
+    background: bottom;
+    color: red;
+}
+#site-log{
+    zoom: .35;
+}
+.screen {
+    box-shadow: 0 0px 97px -30px aquamarine;
+    transition: box-shadow 0.3s ease; /* Smooth transition */
+}
+
+.screen.hovered {
+    box-shadow: 0 0px 97px 10px chocolate;
+}
+#logo-container{
+    height: fit-content;
+    width: fit-content;
+    display: flex;
+    align-content: center;
+}
+#site-log{
+    zoom: .35;
+}
+.screen .carousel{
+
+}
+
+#hero-movie-page{
+    min-height: 30vh;
+    min-width: 40vh !important;
+}
+
+.movie-page-hero{
+    background-size: inherit;
+}
+
+#movie-page-w-full{
+    /*width: fit-content;*/
+     border-radius: 2px !important;
+    padding: 10px;
+    padding-bottom: 44px;
+    background: black;
+}
+.single-movie-container{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+
+@media (min-width: 1024px) {
+    #movie-page-w-full {
+        max-width: none;
+    }
+}

@@ -1,0 +1,20 @@
+
+<div class="movie-container">
+
+  <% @trending_tv_shows.each do |movie| %>
+    <%= link_to '#', class: "home-page-card-link" do %>
+
+      <div class="movie-card card w-96 bg-base-100 shadow-xl shadow-xl image-full transform  duration-1000 hover:scale-105">
+        <% poster_url = "https://image.tmdb.org/t/p/w500#{movie["poster_path"]}" %>
+        <% backdrop_url = "https://image.tmdb.org/t/p/w500#{movie["backdrop_path"]}" %>
+        <figure><img src=<%= poster_url %> alt="Shoes" /></figure>
+        <div class="card-body">
+          <h2 class="card-title"><%= movie["original_title"] %></h2>
+          <p><%= movie["overview"] %></p>
+          <div class="card-actions justify-end">
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>

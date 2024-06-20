@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   def dark_mode
     #theme is set on application.html.erb => <html>
     if user_signed_in?
-      theme = params[:theme] == 'dark' ? 'dark' : 'garden'
+      theme = params[:theme] == 'dark' ? 'dark' : 'retro'
       current_user.update(theme: theme)
       #To ensure that the user is redirected back to the page they
       #were on after setting the theme, you can use the request.referrer

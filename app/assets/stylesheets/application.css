@@ -25,6 +25,17 @@
     display: block;
 }
 
+.menu{
+    display: flex;
+    flex-wrap: wrap;
+    font-size: .875rem;
+    line-height: 1.25rem;
+    padding: .5rem;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
 @keyframes slideUp {
     from {
         transform: translateY(0);

@@ -1,0 +1,70 @@
+<div class="single-movie-container">
+<div class="screen carousel w-full shadow-xl" id="movie-page-w-full" style="border-radius: 20px; ">
+
+  <% @movie_pictures.each do |image| %>
+  <div id="item1" class="carousel-item w-full">
+    <% poster_url = "https://image.tmdb.org/t/p/w500#{image["file_path"]}" %>
+    <div class="movie-page-hero carousel-container hero min-h-screen" id="hero-movie-page" style="background-image: url(<%= poster_url %>);">
+      <div class="hero-overlay bg-opacity-40"></div>
+    </div>
+  </div>
+    <% end %>
+</div>
+<div class="hero-content text-center text-neutral-content">
+  <div class="max-w-md">
+    <h1 class="mb-5 text-5xl font-bold"><%= @movie["original_title"] %></h1>
+    <p class="mb-5"><%= @movie["overview"] %></p>
+    <%= link_to "Add Favourite",'#', class: "start btn btn-primary"%>
+  </div>
+</div>
+
+</div>
+
+<script>
+    // in the newer versions of rails, the pages are loaded using turbo-links
+    // a library used by Rails to speed up navigation by fetching only the HTML and response(got from request to root_path) needed to render the page,
+    // and merging it into the current page without doing a full reload
+
+    // this can sometimes interfere with JavaScript that runs on page load or ducument.loaded (JS is not a html required to render the page)
+
+    // initial when I used document loaded, the carousel was not getting loaded because turbo links was
+    //loading the page with only the response from the request,to avoid this we use  turbolinks:load instead of DOMContentLoaded
+    document.addEventListener('turbolinks:load', function() {
+        const items = document.querySelectorAll('.carousel-item');
+        let currentItem = 0;
+        const itemCount = items.length;
+
+        function showNextItem() {
+            items[currentItem].classList.remove('active');
+            currentItem = (currentItem + 1) % itemCount;
+            items[currentItem].classList.add('active');
+        }
+
+        // Remove 'active' class from all items initially
+        items.forEach(item => item.classList.remove('active'));
+
+        // Add 'active' class to the first item
+        if (items.length > 0) {
+            items[currentItem].classList.add('active');
+        }
+
+        setInterval(showNextItem, 10000);
+
+
+    });
+
+    document.addEventListener('turbolinks:load', function() {
+        const startLinks = document.querySelectorAll('.start');
+        const screenElement = document.querySelector('.screen');
+
+        startLinks.forEach(startLink => {
+            startLink.addEventListener('mouseover', function() {
+                screenElement.classList.add('hovered');
+            });
+
+            startLink.addEventListener('mouseout', function() {
+                screenElement.classList.remove('hovered');
+            });
+        });
+    });
+</script>

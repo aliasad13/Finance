@@ -1,10 +1,10 @@
 .min-h-screen{
     min-height: 80vh;
-    border-radius: 13px;
+    border-radius: 0px !important;
 }
 
 .navbar{
-    background-color: black;
+    background: bottom;
     color: red;
 }
 #site-log{
