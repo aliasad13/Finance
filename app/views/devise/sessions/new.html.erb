@@ -6,6 +6,7 @@
     </figure>
     <div class="card-body">
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <%= f.hidden_field :authenticity_token, value: form_authenticity_token %>
         <div class="field">
           <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "input input-bordered w-full max-w-xs", placeholder: "Email" %>
         </div>
@@ -23,6 +24,11 @@
 
         <div class="actions mt-6">
           <%= f.submit "Log in", class: "btn btn-primary" %>
+        </div>
+
+        <div class="actions mt-6">
+
+          <%= link_to 'Continue with Google', user_google_oauth2_omniauth_authorize_path, method: :post %> <br />
         </div>
 
         <div class="forgot-links mt-4">

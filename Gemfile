@@ -64,3 +64,6 @@ gem 'iex-ruby-client'
 gem 'oauth2'
 gem 'httparty'
 gem 'rack-cors'
+gem 'omniauth-google-oauth2'
+gem 'omniauth-rails_csrf_protection'
+

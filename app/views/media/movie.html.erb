@@ -9,11 +9,16 @@
     </div>
   </div>
     <% end %>
+  <div class="badge badge-primary badge-lg" id="tv-on-light"></div>
 </div>
-<div class="hero-content text-center text-neutral-content">
+  <div class="hero-content text-center text-neutral-content">
   <div class="max-w-md">
+    <div class="divider">
     <h1 class="mb-5 text-5xl font-bold"><%= @movie["original_title"] %></h1>
-    <p class="mb-5"><%= @movie["overview"] %></p>
+    </div>
+      <p class="mb-5"><%= @movie["overview"] %></p>
+    <div class="divider"></div>
+
     <%= link_to "Add Favourite",'#', class: "start btn btn-primary"%>
   </div>
 </div>
@@ -56,14 +61,17 @@
     document.addEventListener('turbolinks:load', function() {
         const startLinks = document.querySelectorAll('.start');
         const screenElement = document.querySelector('.screen');
+        const tvLight = document.querySelector('#tv-on-light');
 
         startLinks.forEach(startLink => {
             startLink.addEventListener('mouseover', function() {
                 screenElement.classList.add('hovered');
+                tvLight.classList.add('hovered');
             });
 
             startLink.addEventListener('mouseout', function() {
                 screenElement.classList.remove('hovered');
+                tvLight.classList.remove('hovered');
             });
         });
     });

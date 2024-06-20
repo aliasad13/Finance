@@ -13,10 +13,19 @@
 .screen {
     box-shadow: 0 0px 97px -30px aquamarine;
     transition: box-shadow 0.3s ease; /* Smooth transition */
+    /* border-radius: 20px; */
+     border-radius: 6px !important;
+    /*padding: 5px;*/
+    /*background: aquamarine;*/isplay: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
 }
 
 .screen.hovered {
     box-shadow: 0 0px 97px 10px chocolate;
+    /*background: chocolate;*/
 }
 #logo-container{
     height: fit-content;
@@ -26,4 +35,16 @@
 }
 #site-log{
         zoom: .35;
+}
+
+#login-card{
+    position: absolute;
+    border-radius: 6px;
+    padding: 20px;
+    box-shadow: 0px 0px 28px -6px black;
+    background: bottom;
+}
+
+.carousel-container{
+    flex: 1;
 }

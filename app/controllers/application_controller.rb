@@ -1,8 +1,10 @@
 class ApplicationController < ActionController::Base
-  before_action :authenticate_user!
-  # CSRF protection for AJAX requests
-  protect_from_forgery with: :exception, prepend: true
 
+  # CSRF protection for AJAX requests
+  protect_from_forgery with: :exception
+
+  before_action :authenticate_user!
+  before_action :configure_permitted_parameters, if: :devise_controller?
   def dark_mode
     #theme is set on application.html.erb => <html>
     if user_signed_in?
@@ -18,6 +20,10 @@ class ApplicationController < ActionController::Base
   end
 
   protected
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:username])
+  end
 
   def after_sign_in_path_for(resource)
     movies_and_shows_path

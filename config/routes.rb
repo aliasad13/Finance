@@ -2,10 +2,11 @@ Rails.application.routes.draw do
   root 'welcome#home'
 
   # get 'my_anime_list/oauth_callback'
-  devise_for :users
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+
   patch '/dark_mode', to: 'application#dark_mode'
 
-  get 'oauth_callback', to: 'my_anime_list#oauth_callback'
+  # get 'oauth_callback', to: 'my_anime_list#oauth_callback'
   get 'authorize', to: 'my_anime_list#authorize'
   get 'animes', to: 'my_anime_list#animes'
   get 'mangas', to: 'my_anime_list#mangas'
