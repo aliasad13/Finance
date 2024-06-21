@@ -45,6 +45,34 @@
     background: bottom;
 }
 
+#login-card_hero-text{
+position: absolute;
+    border-radius: 6px;
+    padding: 20px;
+    background: bottom;
+}
+
 .carousel-container{
     flex: 1;
+}
+
+.fade-container-login-card {
+    transition: opacity 1s ease-in;
+}
+
+.fade-container-herotext {
+    transition: opacity .5s ease-out;
+}
+
+.hidden {
+    opacity: 0;
+}
+
+.visible {
+    opacity: 1;
+}
+
+.slide-up {
+    transform: translateY(0);
+    opacity: 1;
 }

@@ -321,6 +321,7 @@ DEPENDENCIES
   iex-ruby-client
   jbuilder (~> 2.7)
   listen (~> 3.3)
+  mail
   mysql2 (~> 0.5)
   oauth2
   omniauth-google-oauth2

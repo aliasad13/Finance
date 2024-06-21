@@ -6,7 +6,6 @@
     </figure>
     <div class="card-body">
       <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-        <%= f.hidden_field :authenticity_token, value: form_authenticity_token %>
         <div class="field">
           <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "input input-bordered w-full max-w-xs", placeholder: "Email" %>
         </div>
@@ -28,7 +27,7 @@
 
         <div class="actions mt-6">
 
-          <%= link_to 'Continue with Google', user_google_oauth2_omniauth_authorize_path, method: :post %> <br />
+          <%= link_to 'Sign in with Google', user_google_oauth2_omniauth_authorize_path, method: :post %> <br />
         </div>
 
         <div class="forgot-links mt-4">
@@ -40,3 +39,38 @@
     </div>
   </div>
 </div>
+
+<!--<form class="card-body fade-container-login-card hidden" id="login-card" style="display: none;">-->
+  <%#= form_for(resource, as: resource_name, url: session_path(resource_name), html: { method: :post }) do |f| %>
+<!--    <div class="form-control">-->
+<!--      <label class="label">-->
+<!--        <span class="label-text">Email</span>-->
+<!--      </label>-->
+      <%#= f.email_field :email, autofocus: true, autocomplete: "email", class: "input input-bordered w-full max-w-xs", placeholder: "Email" %>
+<!--    </div>-->
+<!--    <div class="form-control">-->
+<!--      <label class="label">-->
+<!--        <span class="label-text">Password</span>-->
+<!--      </label>-->
+      <%#= f.password_field :password, autocomplete: "current-password", class: "input input-bordered w-full max-w-xs", placeholder: "Password" %>
+<!--      <label class="label">-->
+<!--        <a href="#" class="label-text-alt link link-hover">Forgot password?</a>-->
+<!--      </label>-->
+<!--    </div>-->
+    <%# if devise_mapping.rememberable? %>
+<!--      <div class="remember-me field mt-4">-->
+        <%#= f.check_box :remember_me, class: "checkbox" %>
+        <%#= f.label :remember_me %>
+<!--      </div>-->
+    <%# end %>
+<!--    <div class="form-control mt-6">-->
+      <%#= f.submit "Log in", class: "btn btn-primary" %>
+<!--    </div>-->
+<!--    <div class="form-control mt-6">-->
+<!--      <%#= link_to 'Sign in with Google', user_google_oauth2_omniauth_authorize_path, method: :post, class: "btn btn-primary" %> <br />-->
+<!--    </div>-->
+<!--    <div class="forgot-links label-text-alt link link-hover">-->
+      <%#= render "devise/shared/links" %>
+<!--    </div>-->
+  <%# end %>
+<!--</form>-->

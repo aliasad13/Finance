@@ -1,0 +1,31 @@
+<%= render "welcome/hero_text" %>
+
+
+<%= render "devise/sessions/sign_in_form", resource: @resource, resource_name: @resource_name , devise_mapping: @devise_mapping %>
+
+
+<script>
+    document.addEventListener('turbolinks:load', function() {
+        const getStartedLink = document.getElementById('get-started-link');
+        const heroText = document.getElementById('login-card_hero-text');
+        const loginCard = document.getElementById('login-card');
+
+        getStartedLink.addEventListener('click', function(event) {
+            event.preventDefault();
+
+            // Fade out heroText
+            heroText.classList.add('hidden');
+            heroText.classList.remove('visible');
+
+            // After fade-out transition is completee
+            setTimeout(function() {
+                heroText.style.display = 'none';
+
+                // Fade in loginCard
+                loginCard.style.display = 'block';
+                loginCard.classList.add('visible');
+                loginCard.classList.remove('hidden');
+            }, 500); // Match this timeout with the CSS transition duration
+        });
+    });
+</script>

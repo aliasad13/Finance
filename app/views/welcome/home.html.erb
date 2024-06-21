@@ -1,92 +1,53 @@
-<div class="screen carousel w-full shadow-xl" style="border-radius: 20px; ">
+<div class="screen carousel w-full shadow-xl">
 
-  <div class="carousel-container" >
-  <div id="item1" class="carousel-item w-full">
-    <div class=" carousel-container hero min-h-screen" style="background-image: url(<%= asset_path('dune.jpg') %>);">
-      <div class="hero-overlay bg-opacity-60"></div>
-      <div class="hero-content text-center text-neutral-content">
-        <div class="max-w-md" style="display: none">
-          <h1 class="mb-5 text-5xl font-bold">Hello there</h1>
-          <p class="mb-5">Find your favourite movies, find like-minded friends and make new connections. No Best way to cultivate connections than movies</p>
-          <%= link_to "Get Started", new_user_session_path, class: "start btn btn-primary"%>
-        </div>
-      </div>
-    </div>
+  <div class="screen carousel w-full shadow-xl" id="home-carousel">
+    <%= render "welcome/home_carousel" %>
   </div>
-  <div id="item2" class="carousel-item w-full">
-    <div class="hero min-h-screen" style="background-image: url(<%= asset_path('furiosa.jpg') %>);">
-      <div class="hero-overlay bg-opacity-60"></div>
-      <div class="hero-content text-center text-neutral-content">
-        <div class="max-w-md">
-          <h1 class="mb-5 text-5xl font-bold">Hello there</h1>
-          <p class="mb-5">Find your favourite movies, find like-minded friends and make new connections. No Best way to cultivate connections than movies</p>
-          <%= link_to "Get Started", new_user_session_path, class: "start btn btn-primary"%>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div id="item3" class="carousel-item w-full">
-    <div class="hero min-h-screen" style="background-image: url(<%= asset_path('wallpaper3.jpg') %>);">
-      <div class="hero-overlay bg-opacity-60"></div>
-      <div class="hero-content text-center text-neutral-content">
-        <div class="max-w-md">
-          <h1 class="mb-5 text-5xl font-bold">Hello there</h1>
-          <p class="mb-5">Find your favourite movies, find like-minded friends and make new connections. No Best way to cultivate connections than movies</p>
-          <%= link_to "Get Started", new_user_session_path, class: "start btn btn-primary"%>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div id="item4" class="carousel-item w-full">
-    <div class="hero min-h-screen" style="background-image: url(<%= asset_path('jason.jpg') %>);">
-      <div class="hero-overlay bg-opacity-60"></div>
-      <div class="hero-content text-center text-neutral-content">
-        <div class="max-w-md">
-          <h1 class="mb-5 text-5xl font-bold">Hello there</h1>
-          <p class="mb-5">Find your favourite movies, find like-minded friends and make new connections. No Best way to cultivate connections than movies</p>
-          <%= link_to "Get Started", new_user_session_path, class: "start btn btn-primary"%>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div id="item4" class="carousel-item w-full">
-    <div class="hero min-h-screen" style="background-image: url(<%= asset_path('luffy.jpg') %>);">
-      <div class="hero-overlay bg-opacity-60"></div>
-      <div class="hero-content text-center text-neutral-content">
-        <div class="max-w-md">
-          <h1 class="mb-5 text-5xl font-bold">Hello there</h1>
-          <p class="mb-5">Find your favourite movies, find like-minded friends and make new connections. Best way to cultivate connections than movies</p>
-          <%= link_to "Get Started", new_user_session_path, class: "start btn btn-primary"%>
-        </div>
-      </div>
-    </div>
-  </div>
-  </div>
-  <form class="card-body" id="login-card" >
-    <div class="form-control">
-      <label class="label">
-        <span class="label-text">Email</span>
-      </label>
-      <input type="email" placeholder="email" class="input input-bordered" required />
-    </div>
-    <div class="form-control">
-      <label class="label">
-        <span class="label-text">Password</span>
-      </label>
-      <input type="password" placeholder="password" class="input input-bordered" required />
-      <label class="label">
-        <a href="#" class="label-text-alt link link-hover">Forgot password?</a>
-      </label>
-    </div>
-    <div class="form-control mt-6">
-      <button class="btn btn-primary">Login</button>
-    </div>
-  </form>
+    <%= render "welcome/login_card" %>
 </div>
 
 
 <script>
+ // load the login card after the images
+    document.addEventListener('turbolinks:load', function() {
+        const carousel = document.getElementById('home-carousel');
+        const loginCard = document.getElementById('login-card_hero-text');
+
+        // Function to check if all images in the carousel are loaded
+        function areImagesLoaded() {
+            const images = carousel.getElementsByTagName('img');
+            for (let i = 0; i < images.length; i++) {
+                if (!images[i].complete) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        // Function to show the login card
+        function showLoginCard() {
+            loginCard.style.display = 'block';
+            loginCard.classList.add('visible');
+            loginCard.classList.remove('hidden');
+        }
+
+        // Check if images are loaded immediately
+        if (areImagesLoaded()) {
+            showLoginCard();
+        } else {
+            // Add an event listener for when each image loads
+            const images = carousel.getElementsByTagName('img');
+            let imagesLoaded = 0;
+            for (let i = 0; i < images.length; i++) {
+                images[i].addEventListener('load', function() {
+                    imagesLoaded++;
+                    if (imagesLoaded === images.length) {
+                        showLoginCard();
+                    }
+                });
+            }
+        }
+    });
   // in the newer versions of rails, the pages are loaded using turbo-links
   // a library used by Rails to speed up navigation by fetching only the HTML and response(got from request to root_path) needed to render the page,
   // and merging it into the current page without doing a full reload
@@ -124,13 +85,19 @@
       const screenElement = document.querySelector('.screen');
 
       startLinks.forEach(startLink => {
-          startLink.addEventListener('mouseover', function() {
+          // startLink.addEventListener('mouseover', function() {
+          //     screenElement.classList.add('hovered');
+          // });
+          //
+          // startLink.addEventListener('mouseout', function() {
+          //     screenElement.classList.remove('hovered');
+          // });
+
+          startLink.addEventListener('click', function() {
               screenElement.classList.add('hovered');
           });
 
-          startLink.addEventListener('mouseout', function() {
-              screenElement.classList.remove('hovered');
-          });
+
       });
   });
 </script>

@@ -1,0 +1,77 @@
+
+<!--<div class="login-card">-->
+<!--  <div class="card card-side bg-base-100 shadow-xl">-->
+<!--    <figure class="shadow-xl">-->
+<%#= image_tag 'Welcome.png', alt: 'Relax', class: 'your-css-class' %>
+<!--    </figure>-->
+<!--    <div class="card-body">-->
+<%#= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+<!--        <div class="field">-->
+<%#= f.email_field :email, autofocus: true, autocomplete: "email", class: "input input-bordered w-full max-w-xs", placeholder: "Email" %>
+<!--        </div>-->
+
+<!--        <div class="field mt-4">-->
+<%#= f.password_field :password, autocomplete: "current-password", class: "input input-bordered w-full max-w-xs", placeholder: "Password" %>
+<!--        </div>-->
+
+<%# if devise_mapping.rememberable? %>
+<!--          <div class="remember-me field mt-4">-->
+<%#= f.check_box :remember_me, class: "checkbox" %>
+<%#= f.label :remember_me %>
+<!--          </div>-->
+<%# end %>
+
+<!--        <div class="actions mt-6">-->
+<%#= f.submit "Log in", class: "btn btn-primary" %>
+<!--        </div>-->
+
+<!--        <div class="actions mt-6">-->
+
+<!--          <%#= link_to 'Sign in with Google', user_google_oauth2_omniauth_authorize_path, method: :post %> <br />-->
+<!--        </div>-->
+
+<!--        <div class="forgot-links mt-4">-->
+<%#= render "devise/shared/links" %>
+<!--        </div>-->
+<%# end %>
+
+
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+<form class="card-body fade-container-login-card hidden" id="login-card" style="display: none;">
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { method: :post }) do |f| %>
+    <div class="form-control">
+      <label class="label">
+        <span class="label-text">Email</span>
+      </label>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "input input-bordered w-full max-w-xs", placeholder: "Email" %>
+    </div>
+    <div class="form-control">
+      <label class="label">
+        <span class="label-text">Password</span>
+      </label>
+      <%= f.password_field :password, autocomplete: "current-password", class: "input input-bordered w-full max-w-xs", placeholder: "Password" %>
+      <label class="label">
+        <a href="#" class="label-text-alt link link-hover">Forgot password?</a>
+      </label>
+    </div>
+    <% if devise_mapping.rememberable? %>
+      <div class="remember-me field mt-4">
+        <%= f.check_box :remember_me, class: "checkbox" %>
+        <%= f.label :remember_me %>
+      </div>
+    <% end %>
+    <div class="form-control mt-6">
+      <%= f.submit "Log in", class: "btn btn-primary", formaction: session_path(resource_name), formmethod: :post%>
+    </div>
+    <div class="form-control mt-6">
+      <%= link_to 'Sign in with Google', user_google_oauth2_omniauth_authorize_path, method: :post, class: "btn btn-primary" %> <br />
+    </div>
+    <div class="forgot-links label-text-alt link link-hover">
+      <%= render "devise/shared/links", resource: @resource, resource_name: @resource_name , devise_mapping: @devise_mapping  %>
+    </div>
+  <% end %>
+</form>
+
