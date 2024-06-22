@@ -31,7 +31,7 @@ class User < ApplicationRecord
   private
 
   def send_welcome_email
-    UserMailer.with(user: self).welcome_email.deliver_now
+    WelcomeMailSideKiqWorker.perform_async('welcome_email', self.id)
   end
 
   def self.generate_unique_username(firstname, lastname)

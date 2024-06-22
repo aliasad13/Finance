@@ -1,0 +1,4 @@
+echo "Restarting Sidekiq..."
+bin/stop_sidekiq
+bin/start_sidekiq
+echo "Sidekiq restarted."

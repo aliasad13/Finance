@@ -1,0 +1,8 @@
+if [ -f tmp/pids/sidekiq.pid ]; then
+  echo "Stopping Sidekiq..."
+  kill -TERM $(cat tmp/pids/sidekiq.pid)
+  rm tmp/pids/sidekiq.pid
+  echo "Sidekiq stopped."
+else
+  echo "No Sidekiq PID file found. Is Sidekiq running?"
+fi

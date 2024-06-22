@@ -1,0 +1,3 @@
+echo "Starting Sidekiq..."
+bundle exec sidekiq -d -L log/sidekiq.log -P tmp/pids/sidekiq.pid
+echo "Sidekiq started with PID $(cat tmp/pids/sidekiq.pid)"
