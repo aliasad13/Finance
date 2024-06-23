@@ -1,0 +1,3 @@
+<% unless current_user.movies.pluck(:movie_id).include?(@movie["id"].to_s) %>
+$("#favorite_link").html("<%= j link_to 'Add Favourite', add_favorite_movie_path(@movie), method: :post, remote: true, class: 'start btn btn-primary' %>");
+<% end %>

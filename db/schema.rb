@@ -10,7 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2024_06_20_145024) do
+ActiveRecord::Schema.define(version: 2024_06_23_160952) do
+
+  create_table "movies", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.string "movie_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "user_movies", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "movie_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["movie_id"], name: "index_user_movies_on_movie_id"
+    t.index ["user_id", "movie_id"], name: "index_user_movies_on_user_id_and_movie_id", unique: true
+    t.index ["user_id"], name: "index_user_movies_on_user_id"
+  end
 
   create_table "users", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -43,4 +59,6 @@ ActiveRecord::Schema.define(version: 2024_06_20_145024) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
+  add_foreign_key "user_movies", "movies"
+  add_foreign_key "user_movies", "users"
 end

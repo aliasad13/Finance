@@ -1,29 +1,33 @@
 <div class="single-movie-container">
-<div class="screen carousel w-full shadow-xl" id="movie-page-w-full" style="border-radius: 20px; ">
-
-  <% @movie_pictures.each do |image| %>
-  <div id="item1" class="carousel-item w-full">
-    <% poster_url = "https://image.tmdb.org/t/p/w500#{image["file_path"]}" %>
-    <div class="movie-page-hero carousel-container hero min-h-screen" id="hero-movie-page" style="background-image: url(<%= poster_url %>);">
-      <div class="hero-overlay bg-opacity-40"></div>
-    </div>
-  </div>
+  <div class="screen carousel w-full shadow-xl" id="movie-page-w-full" style="border-radius: 20px;">
+    <% @movie_pictures.each do |image| %>
+      <div id="item1" class="carousel-item w-full">
+        <% poster_url = "https://image.tmdb.org/t/p/w500#{image["file_path"]}" %>
+        <div class="movie-page-hero carousel-container hero min-h-screen" id="hero-movie-page" style="background-image: url(<%= poster_url %>);">
+          <div class="hero-overlay bg-opacity-40"></div>
+        </div>
+      </div>
     <% end %>
-  <div class="badge badge-primary badge-lg" id="tv-on-light"></div>
-</div>
+    <div class="badge badge-primary badge-lg" id="tv-on-light"></div>
+  </div>
   <div class="hero-content text-center text-neutral-content">
-  <div class="max-w-md">
-    <div class="divider">
-    <h1 class="mb-5 text-5xl font-bold"><%= @movie["original_title"] %></h1>
-    </div>
+    <div class="max-w-md">
+      <div class="divider">
+        <h1 class="mb-5 text-5xl font-bold"><%= @movie["original_title"] %></h1>
+      </div>
       <p class="mb-5"><%= @movie["overview"] %></p>
-    <div class="divider"></div>
-
-    <%= link_to "Add Favourite",'#', class: "start btn btn-primary"%>
+      <div class="divider"></div>
+      <div id="favorite_link">
+        <% if current_user.movies.pluck(:movie_id).include?(@movie["id"].to_s) %>
+          <%= link_to "Remove Favourite", remove_favorite_movie_path(@movie), method: :delete, remote: true, class: "start btn btn-primary" %>
+        <% else %>
+          <%= link_to "Add Favourite", add_favorite_movie_path(@movie), method: :post, remote: true, class: "start btn btn-primary" %>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>
 
-</div>
 
 <script>
     // in the newer versions of rails, the pages are loaded using turbo-links

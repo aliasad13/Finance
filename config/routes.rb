@@ -29,4 +29,11 @@ Rails.application.routes.draw do
     end
   end
 
+  resources 'movies', only: [] do
+    member do
+      post 'add_favorite'
+      delete 'remove_favorite'
+    end
+  end
+
   end
