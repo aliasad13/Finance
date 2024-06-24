@@ -143,6 +143,18 @@ GEM
     json (2.7.2)
     jwt (2.8.1)
       base64
+    kaminari (1.2.2)
+      activesupport (>= 4.1.0)
+      kaminari-actionview (= 1.2.2)
+      kaminari-activerecord (= 1.2.2)
+      kaminari-core (= 1.2.2)
+    kaminari-actionview (1.2.2)
+      actionview
+      kaminari-core (= 1.2.2)
+    kaminari-activerecord (1.2.2)
+      activerecord
+      kaminari-core (= 1.2.2)
+    kaminari-core (1.2.2)
     listen (3.9.0)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -366,6 +378,7 @@ DEPENDENCIES
   iex-ruby-client
   jbuilder (~> 2.7)
   jquery-rails
+  kaminari
   listen (~> 3.3)
   mail
   mailcatcher

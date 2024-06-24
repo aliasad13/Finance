@@ -1,0 +1,47 @@
+<%# The container tag
+  - available local variables
+    current_page:  a page object for the currently displayed page
+    total_pages:   total number of pages
+    per_page:      number of items to fetch per page
+    remote:        data-remote
+    paginator:     the paginator that renders the pagination tags inside
+-%>
+<%= paginator.render do -%>
+  <nav class="join" role="navigation" aria-label="pager">
+    <% unless current_page.first? %>
+    <div class="join-item btn btn-md">
+    <%= first_page_tag  %>
+    </div>
+      <% end %>
+    <% unless current_page.first?  %>
+    <div class="join-item btn btn-md">
+    <%= prev_page_tag %>
+    </div>
+      <% end %>
+
+      <% each_page do |page| -%>
+      <% if page.display_tag? -%>
+        <div class="join-item btn btn-md <%= 'btn-active' if page.current? %>">
+        <%= page_tag page %>
+        </div>
+      <% elsif !page.was_truncated? -%>
+        <div class="join-item btn btn-md ">
+        <%= gap_tag %>
+        </div>
+      <% end -%>
+    <% end -%>
+
+    <% unless current_page.out_of_range? %>
+      <% unless current_page.last? %>
+      <div class="join-item btn btn-md">
+      <%= next_page_tag  %>
+      </div>
+        <% end %>
+      <% unless current_page.last? %>
+        <div class="join-item btn btn-md">
+      <%= last_page_tag  %>
+        </div>
+    <% end %>
+    <% end %>
+  </nav>
+<% end -%>

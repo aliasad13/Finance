@@ -19,6 +19,13 @@ Rails.application.routes.draw do
   # root 'my_anime_list#index' # Example: Set root to my_anime_list#index
   get 'movies_and_shows', to: 'media#index'
 
+  resources 'users', only: [:index] do
+
+    collection do
+    end
+
+  end
+
   resources 'media', only: [] do
     collection do
       get :movies
@@ -33,6 +40,10 @@ Rails.application.routes.draw do
     member do
       post 'add_favorite'
       delete 'remove_favorite'
+    end
+
+    collection do
+      get 'favorites'
     end
   end
 

@@ -27,4 +27,12 @@ class MoviesController < ApplicationController
       format.js
     end
   end
+
+  def favorites
+    favorite_movies = current_user.movies.pluck(:movie_id)
+    @favorite_movies = favorite_movies.map { |movie_id| tmdb_service.fetch_movie(movie_id) }.compact
+    @genres = tmdb_service.fetch_genre_id
+    @genres_hash = @genres["genres"].map { |genre| [genre["id"], genre["name"]] }.to_h
+  end
+
 end

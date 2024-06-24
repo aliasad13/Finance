@@ -15,8 +15,29 @@
       <div class="divider">
         <h1 class="mb-5 text-5xl font-bold"><%= @movie["original_title"] %></h1>
       </div>
+      <div class="stats shadow">
+        <div class="stat place-items-center">
+          <div class="stat-title">Downloads</div>
+          <div class="stat-value">31K</div>
+        </div>
+
+        <div class="stat place-items-center">
+          <div class="stat-title">Users</div>
+          <div class="stat-value text-secondary">4,200</div>
+          <div class="stat-desc text-secondary">↗︎ 40 (2%)</div>
+        </div>
+
+        <div class="stat place-items-center">
+          <div class="stat-title">New Registers</div>
+          <div class="stat-value">1,200</div>
+          <div class="stat-desc">↘︎ 90 (14%)</div>
+        </div>
+      </div>
+      <div class="divider"></div>
+
       <p class="mb-5"><%= @movie["overview"] %></p>
       <div class="divider"></div>
+
       <div id="favorite_link">
         <% if current_user.movies.pluck(:movie_id).include?(@movie["id"].to_s) %>
           <%= link_to "Remove Favourite", remove_favorite_movie_path(@movie), method: :delete, remote: true, class: "start btn btn-primary" %>

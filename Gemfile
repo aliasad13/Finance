@@ -71,3 +71,5 @@ gem 'mailcatcher'
 gem 'eventmachine', '~> 1.0', '>= 1.0.3'
 gem 'sidekiq'
 gem 'jquery-rails'
+gem 'kaminari'
+
