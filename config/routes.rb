@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   # root 'my_anime_list#index' # Example: Set root to my_anime_list#index
   get 'movies_and_shows', to: 'media#index'
 
-  resources 'users', only: [:index] do
+  resources 'users' do
 
     collection do
     end

@@ -1,0 +1,49 @@
+<!-- app/views/users/show.html.erb -->
+
+<div class="user-profile-card card bg-base-100 w-96 shadow-xl">
+  <figure class="px-10 pt-10">
+    <img
+      src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
+      alt="Shoes"
+      class="rounded-xl" />
+  </figure>
+  <div class="card-body items-center text-center">
+    <h2 class="card-title"><%= @user.username %></h2>
+    <div class="overflow-x-auto">
+      <table class="table ">
+        <!-- head -->
+        <thead>
+        <tr>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- row 1 -->
+        <tr>
+          <th>First Name</th>
+          <td><%= @user.firstname %></td>
+        </tr>
+        <!-- row 2 -->
+        <tr>
+          <th>Last Name</th>
+          <td><%= @user.lastname %></td>
+        </tr>
+        <!-- row 3 -->
+        <tr>
+          <th>Email</th>
+          <td><%= @user.email %></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card-actions">
+      <%= link_to 'Edit Profile', edit_user_registration_path, class: 'btn btn-primary' %>
+    </div>
+  </div>
+</div>
+
+

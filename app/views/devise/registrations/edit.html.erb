@@ -1,43 +1,98 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+  <!-- app/views/users/show.html.erb -->
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
+  <div class="user-profile-card card bg-base-100 w-96 shadow-xl">
+    <figure class="px-10 pt-10">
+      <img
+        src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
+        alt="Shoes"
+        class="rounded-xl" />
+    </figure>
+    <div class="card-body items-center text-center">
+      <h2 class="card-title"><%= @user.username %></h2>
+      <div class="overflow-x-auto">
+        <table class="table ">
+          <!-- head -->
+          <thead>
+          <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          <!-- row 1 -->
 
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
-    <% end %>
-  </div>
+          <tr>
+            <th> <%= f.label :username %><br /></th>
+            <td ><%= f.text_field :username, autofocus: true, autocomplete: "username", class: 'input input-bordered w-full max-w-xs' %></td>
+          </tr>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+          <tr>
+            <th> <%= f.label :firstname %><br /></th>
+            <td><%= f.text_field :firstname, autofocus: true, class: 'input input-bordered w-full max-w-xs' %></td>
+          </tr>
 
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
-  </div>
+          <tr>
+            <th> <%= f.label :lastname %><br /></th>
+            <td><%= f.text_field :lastname, autofocus: true, class: 'input input-bordered w-full max-w-xs'%></td>
+          </tr>
 
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
+          <tr>
+            <th> <%= f.label :email %><br /></th>
+            <td><%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'input input-bordered w-full max-w-xs' %></td>
+          </tr>
+
+
+          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+            <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+          <% end %>
+          <!-- row 2 -->
+          <tr>
+            <th class="tooltip tooltip-right" id="edit-user-tooltip" data-tip="leave blank if you don't want to change it"> <%= f.label :password %><br /></th>
+            <td><%= f.password_field :password, autocomplete: "new-password", class: 'input input-bordered w-full max-w-xs' %></td>
+          </tr>
+          <!-- row 3 -->
+          <tr>
+            <th>  <%= f.label :password_confirmation %><br /></th>
+            <td><%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'input input-bordered w-full max-w-xs' %></td>
+          </tr>
+
+          <tr>
+            <th class="tooltip tooltip-right" id="edit-user-tooltip" data-tip="we need your current password to confirm your changes"> <%= f.label :current_password %> <br /></th>
+            <td> <%= f.password_field :current_password, autocomplete: "current-password", class: 'input input-bordered w-full max-w-xs' %></td>
+          </tr>
+
+
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card-actions">
+        <%= f.submit "Update",  class: 'btn btn-primary' %>
+      </div>
 <% end %>
+<div class="join join-vertical w-full">
+  <div class="collapse join-item border-base-300 border">
+    <input class="accordian-checkbox" type="checkbox" name="my-accordion-4"/>
+    <div class="collapse-title font-medium" id="accordian-button">Delete</div>
+    <div class="collapse-content">
+    <div> <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete, class: 'btn'%></div>
+    </div>
+  </div>
+</div>
 
-<h3>Cancel my account</h3>
 
-<div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
 
-<%= link_to "Back", :back %>
+
+      <%= link_to "Back", :back %>
+
+    </div>
+  </div>
+
+
+
