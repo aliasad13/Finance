@@ -1,0 +1,77 @@
+
+
+<div class="overflow-x-hidden table-container">
+  <table class="table">
+    <!-- head -->
+    <thead>
+    <tr>
+      <th>
+        <!--        <label>-->
+        <!--          <input type="checkbox" class="checkbox" />-->
+        <!--        </label>-->
+      </th>
+      <th>Username</th>
+      <th>Email</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- row 1 -->
+    <% @friends.each do |user| %>
+      <tr>
+        <th>
+          <!--        <label>-->
+          <!--          <input type="checkbox" class="checkbox" />-->
+          <!--        </label>-->
+        </th>
+        <td>
+          <div class="flex items-center gap-3">
+            <div class="avatar">
+              <div class="mask mask-squircle h-12 w-12">
+                <%= link_to user_path(user) do%>
+                  <% if user.profile_picture.attached? %>
+                    <%= image_tag url_for(user.profile_thumbnail), class: "rounded-xl"%>
+                  <% else %>
+                    <%= image_tag 'Avatar2.jpeg', alt: 'Relax', class: 'your-css-class' %>
+                  <%end %>
+                <%end %>
+              </div>
+            </div>
+            <div>
+              <div class="font-bold"><%= user.username %></div>
+
+            </div>
+          </div>
+        </td>
+        <td>
+          <div class="text-sm opacity-50"><%= user.email %></div>
+          <br />
+          <!--        <span class="badge badge-ghost badge-sm"></span>-->
+        </td>
+        <td></td>
+        <th>
+
+          <% if !current_user.friends?(user) %>
+            <%if current_user.sent_friend_request_to?(user)%>
+              <button class="btn btn-ghost btn-xs"><%= link_to 'Remove Request', remove_friend_request_friend_request_path(user.id), method: :delete %></button>
+            <% elsif current_user.received_friend_request_from?(user)%>
+              <button class="btn btn-ghost btn-xs"><%= link_to 'Accept', accept_friend_request_path(user.id), method: :put %></button> | <button class="btn btn-ghost btn-xs"><%= link_to 'Reject', reject_friend_request_path(user.id), method: :put %></button>
+            <% else %>
+              <button class="btn btn-ghost btn-xs"><%= link_to 'Add Friend', create_friend_request_friend_request_path(user.id), method: :post %></button>
+            <% end %>
+          <% elsif current_user.friends?(user) %>
+            <button class="btn btn-ghost btn-xs"><%= link_to 'Remove', remove_friend_friendship_path(user.id), method: :delete %></button>
+          <% end %>
+        </th>
+      </tr>
+    <% end %>
+    <!-- row 2 -->
+
+    </tbody>
+    <!-- foot -->
+    <tfoot>
+
+    </tfoot>
+  </table>
+  <%= paginate @friends %>
+</div>

@@ -72,4 +72,6 @@ gem 'eventmachine', '~> 1.0', '>= 1.0.3'
 gem 'sidekiq'
 gem 'jquery-rails'
 gem 'kaminari'
+gem 'aws-sdk-s3'
+gem 'image_processing'
 

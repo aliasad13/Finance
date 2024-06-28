@@ -1,0 +1,65 @@
+
+
+<div class="overflow-y-hidden table-container">
+  <table class="table">
+    <!-- head -->
+    <thead>
+    <tr>
+      <th>
+        <!--        <label>-->
+        <!--          <input type="checkbox" class="checkbox" />-->
+        <!--        </label>-->
+      </th>
+      <th>Username</th>
+      <th>Email</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- row 1 -->
+    <% @received_requests.each do |send_request| %>
+      <% user = send_request.sender %>
+      <tr>
+        <th>
+          <!--        <label>-->
+          <!--          <input type="checkbox" class="checkbox" />-->
+          <!--        </label>-->
+        </th>
+        <td>
+          <div class="flex items-center gap-3">
+            <div class="avatar">
+              <div class="mask mask-squircle h-12 w-12">
+                <% if user.profile_picture.attached? %>
+                  <%= image_tag url_for(user.profile_thumbnail), class: "rounded-xl"%>
+                <% else %>
+                  <%= image_tag 'Avatar2.jpeg', alt: 'Relax', class: 'your-css-class' %>
+                <%end %>
+              </div>
+            </div>
+            <div>
+              <div class="font-bold"><%= user.username %></div>
+
+            </div>
+          </div>
+        </td>
+        <td>
+          <div class="text-sm opacity-50"><%= user.email %></div>
+          <br />
+          <!--        <span class="badge badge-ghost badge-sm"></span>-->
+        </td>
+        <td></td>
+        <th>
+          <button class="btn btn-ghost btn-xs"><%= link_to 'Accept', accept_friend_request_path(user.id), method: :put %></button> | <button class="btn btn-ghost btn-xs"><%= link_to 'Reject', reject_friend_request_path(user.id), method: :put %></button>
+        </th>
+      </tr>
+    <% end %>
+    <!-- row 2 -->
+
+    </tbody>
+    <!-- foot -->
+    <tfoot>
+
+    </tfoot>
+  </table>
+  <%= paginate @received_requests %>
+</div>

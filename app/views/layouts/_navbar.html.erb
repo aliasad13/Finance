@@ -18,9 +18,11 @@
                   <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
                 <% end %>
                   </li>
-              <li><%= link_to 'Favorite Movies', favorites_movies_path %></li>
+              <li><%= link_to 'Favorites', favorite_movies_user_path(current_user) %></li>
+              <li><%= link_to 'Friends', friends_user_path(current_user) %></li>
               <li><%= link_to 'All Users', users_path %>
-                <%= link_to 'My Profile', user_path(current_user) %>
+                <%= link_to 'Profile', user_path(current_user) %>
+              <li><%= link_to "My Requests", friend_requests_friend_requests_path  %></li>
               <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete, data: {confirm: "Are you sure"} %></li>
             <% else %>
               <li><%= link_to "Sign In", new_user_session_path %></li>

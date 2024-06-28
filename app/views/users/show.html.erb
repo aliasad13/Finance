@@ -2,10 +2,11 @@
 
 <div class="user-profile-card card bg-base-100 w-96 shadow-xl">
   <figure class="px-10 pt-10">
-    <img
-      src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
-      alt="Shoes"
-      class="rounded-xl" />
+    <% if @user.profile_picture.attached? %>
+      <%= image_tag url_for(@user.profile_thumbnail), class: "rounded-xl"%>
+    <% else %>
+      <%= image_tag 'Avatar2.jpeg', alt: 'Relax', class: 'your-css-class' %>
+    <%end %>
   </figure>
   <div class="card-body items-center text-center">
     <h2 class="card-title"><%= @user.username %></h2>
@@ -40,9 +41,19 @@
       </table>
     </div>
 
-    <div class="card-actions">
-      <%= link_to 'Edit Profile', edit_user_registration_path, class: 'btn btn-primary' %>
+    <div class="user-profile-actions">
+      <% if @user == current_user %>
+        <div class="card-actions">
+          <%= link_to 'Edit Profile', edit_user_registration_path, class: 'btn btn-primary' %>
+        </div>
+        <% end %>
+      <div class="card-actions">
+        <% if current_user.friends?(@user) %>
+        <%= link_to 'Favorites', favorite_movies_user_path(@user), class: 'btn btn-primary' %>
+      <% end %>
+          </div>
     </div>
+
   </div>
 </div>
 

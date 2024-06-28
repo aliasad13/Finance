@@ -6,10 +6,7 @@
 
   <div class="user-profile-card card bg-base-100 w-96 shadow-xl">
     <figure class="px-10 pt-10">
-      <img
-        src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
-        alt="Shoes"
-        class="rounded-xl" />
+      <%= image_tag url_for(@user.profile_thumbnail), class: "profile-image rounded-xl"%>
     </figure>
     <div class="card-body items-center text-center">
       <h2 class="card-title"><%= @user.username %></h2>
@@ -26,7 +23,7 @@
           </thead>
           <tbody>
           <!-- row 1 -->
-
+           <%= f.file_field :profile_picture, class: 'file-input w-full max-w-xs' %>
           <tr>
             <th> <%= f.label :username %><br /></th>
             <td ><%= f.text_field :username, autofocus: true, autocomplete: "username", class: 'input input-bordered w-full max-w-xs' %></td>

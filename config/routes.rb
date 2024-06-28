@@ -20,10 +20,45 @@ Rails.application.routes.draw do
   get 'movies_and_shows', to: 'media#index'
 
   resources 'users' do
+    member do
+      get 'favorite_movies'
+      get 'friends'
+    end
 
     collection do
     end
+  end
 
+  resources 'friendships', only: [] do
+
+    # member do
+    #   post 'add_friend'
+    #   delete 'remove_friend'
+    # end
+
+    collection do
+      get 'friends'
+    end
+
+  end
+
+  resources :friendships, only: [] do
+    member do
+      post 'add_friend'
+      delete 'remove_friend'
+    end
+  end
+
+  resources :friend_requests, only: [] do
+    member do
+      post 'create_friend_request'
+      put :accept
+      put :reject
+      delete 'remove_friend_request'
+    end
+    collection do
+      get 'friend_requests'
+    end
   end
 
   resources 'media', only: [] do
@@ -40,10 +75,10 @@ Rails.application.routes.draw do
     member do
       post 'add_favorite'
       delete 'remove_favorite'
+      get 'favorites'
     end
 
     collection do
-      get 'favorites'
     end
   end
 
