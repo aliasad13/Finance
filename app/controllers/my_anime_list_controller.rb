@@ -7,7 +7,6 @@ class MyAnimeListController < ApplicationController
 
   def authorize
     code_verifier = SecureRandom.urlsafe_base64(64)
-    byebug
     code_challenge = Base64.urlsafe_encode64(Digest::SHA256.digest(code_verifier)).gsub('=', '')
     session[:myanimelist_code_verifier] = code_verifier
     authorize_url = @my_anime_list_client.auth_code.authorize_url(
@@ -22,7 +21,6 @@ class MyAnimeListController < ApplicationController
 
 
   def oauth_callback
-    byebug
 
     code_verifier = session.delete(:myanimelist_code_verifier)
     token = @my_anime_list_client.auth_code.get_token(code: params[:code], grant_type: 'authorization_code', redirect_uri: oauth_callback_url, code_verifier: code_verifier)

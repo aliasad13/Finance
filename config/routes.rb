@@ -29,6 +29,12 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :conversations, only: [:index, :show, :create] do
+    resources :messages, only: [:create]
+  end
+
+  mount ActionCable.server => '/cable'
+
   resources 'friendships', only: [] do
 
     # member do

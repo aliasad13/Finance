@@ -12,6 +12,10 @@ class User < ApplicationRecord
   has_many :sent_friend_requests, class_name: 'FriendRequest', foreign_key: 'sender_id', dependent: :destroy #user.sent_friend_requests => select * from friend requests where sender_id = user_id, this is the reason why we are using sender_id as foreign key
   has_many :received_friend_requests, class_name: 'FriendRequest', foreign_key: 'receiver_id', dependent: :destroy #user.received_friend_requests, in the query we use where receiver_id = user.id
 
+  has_many :sent_conversations, class_name: 'Conversation', foreign_key: 'sender_id'
+  has_many :received_conversations, class_name: 'Conversation', foreign_key: 'receiver_id'
+  has_many :messages
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -21,6 +25,11 @@ class User < ApplicationRecord
 
   after_create -> (user){ user.update(theme: 'dark') }
   after_create :send_welcome_email
+
+  fullname = -> { firstname + " " + lastname }; define_method :fullname, &fullname
+  # Yes, exactly! In Ruby, define_method is a method provided by the Module class,
+  # which allows you to dynamically define instance methods. When you have a Proc or a lambda (-> { ... }),
+  # you can use define_method to convert it into a method that can be called on instances of the class.
 
   def self.from_omniauth(access_token)
     data = access_token.info
@@ -39,6 +48,8 @@ class User < ApplicationRecord
 
     user
   end
+
+
 
   def send_friend_request(user)
     sent_friend_requests.create(receiver: user, status: 'pending') unless friends?(user) || pending_friend_request?(user)
