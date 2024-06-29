@@ -1,1 +1,7 @@
-<p><strong><%= message.user.username %>:</strong> <%= message.content %></p>
+<% @messages.each do |message| %>
+  <% if message.user_id == current_user.id %>
+    <div class="chat chat-end"><div class="chat-bubble"><p><%= message.content %></p></div></div>
+  <% else %>
+    <div class="chat chat-start"><div class="chat-bubble"><p><%= message.content %></p></div></div>
+  <% end %>
+<% end %>

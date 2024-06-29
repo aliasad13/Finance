@@ -20,6 +20,7 @@
                   </li>
               <li><%= link_to 'Favorites', favorite_movies_user_path(current_user) %></li>
               <li><%= link_to 'Friends', friends_user_path(current_user) %></li>
+              <li><%= link_to 'Chats', conversations_path %></li>
               <li><%= link_to 'All Users', users_path %>
                 <%= link_to 'Profile', user_path(current_user) %>
               <li><%= link_to "My Requests", friend_requests_friend_requests_path  %></li>

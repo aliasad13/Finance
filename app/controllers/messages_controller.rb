@@ -5,7 +5,7 @@ class MessagesController < ApplicationController
     puts "\n\n\n\n\n\n\n\n\n\n broadcast after creating message \n\n\n\n\n\n\n\n\n\n\n"
     puts "\n\n\n\n\n\n\n\n\n\n @conversation: #{@conversation.inspect},  @message: #{@message.inspect} \n\n\n\n\n\n\n\n\n\n\n"
     username = @message.user.fullname
-    payload = {message: @message, username: username}
+    payload = {message: @message, current_user: current_user.id, message_user: @message.user_id}
     ChatChannel.broadcast_to(@conversation, payload)
     redirect_to conversation_path(@conversation)
   end

@@ -1,18 +1,32 @@
-<div class="chat-box-container">
-  <h2>Conversation with <%= @conversation.sender == current_user ? @conversation.receiver.username : @conversation.sender.username %></h2>
+<div class="chat-box-container shadow-xl bg-base-200">
+  <!--  <h2>Conversation with <%#= @conversation.sender == current_user ? @conversation.receiver.username : @conversation.sender.username %></h2>-->
 
-
-  <div id="messages chat-box">
-    <%= render @messages %>
+  <div id="messages" class="chat-box">
+    <%= render 'messages/message', local: {message: @messages} %>
   </div>
 
-  <%= form_with model: [@conversation, @message], local: false do |form| %>
-    <div>
-      <%= form.text_area :content, id: 'message_content', class: 'textarea textarea-info' %>
-      <%= form.submit 'Send' %>
+  <%= form_with model: [@conversation, @message], class: 'chat-form', id: 'chat-form', local: false do |form| %>
+    <div class="chat-form-content">
+      <%= form.text_area :content, id: 'message_content', class: 'textarea textarea-bordered' %>
     </div>
   <% end %>
 
   <div id="conversation-id" data-conversation-id="<%= @conversation.id %>"></div>
-
 </div>
+
+<script>
+    document.addEventListener('turbolinks:load', () => {
+        const messageForm = document.getElementById('chat-form');
+        const messageContent = document.getElementById('message_content');
+
+        if (messageForm && messageContent) {
+            messageContent.addEventListener('keydown', function(event) {
+                if (event.key === 'Enter' && !event.shiftKey) {
+                    event.preventDefault();
+                    messageForm.submit();
+                }
+            });
+        }
+    });
+
+</script>

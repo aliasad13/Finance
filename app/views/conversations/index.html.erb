@@ -1,0 +1,47 @@
+<div class="chat-container">
+  <div class="chat-heading">
+<!--<h1>My Conversations</h1>-->
+  </div>
+<div class="overflow-x-hidden table-container">
+
+
+  <table class="table">
+
+<% @conversations.each do |conversation| %>
+  <%user = current_user == conversation.sender ? conversation.receiver : conversation.sender%>
+  <tr>
+    <th>
+      <!--        <label>-->
+      <!--          <input type="checkbox" class="checkbox" />-->
+      <!--        </label>-->
+    </th>
+    <td>
+      <div class="flex items-center gap-3">
+        <div class="avatar">
+          <div class="mask mask-squircle h-12 w-12">
+            <%= link_to user_path(user) do%>
+              <% if user.profile_picture.attached? %>
+                <%= image_tag url_for(user.profile_thumbnail), class: "rounded-xl"%>
+              <% else %>
+                <%= image_tag 'Avatar2.jpeg', alt: 'Relax', class: 'your-css-class' %>
+              <%end %>
+            <%end %>
+          </div>
+        </div>
+        <div>
+          <div class="font-bold"><%= user.username %></div>
+
+        </div>
+      </div>
+    </td>
+
+    <th>
+
+
+      <%= link_to 'Chat', conversations_path(sender_id: current_user.id, receiver_id: conversation.receiver_id), method: :post %>
+    </th>
+  </tr>
+<% end %>
+  </table>
+</div>
+</div>
