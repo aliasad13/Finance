@@ -1,8 +1,6 @@
 class ChatChannel < ApplicationCable::Channel
   def subscribed
     conversation = Conversation.find(params[:conversation_id])
-    puts "\n\n\n\n\n\n\n\n\n\n #{conversation.inspect} \n\n\n\n\n\n\n\n\n\n\n"
-
     stream_for conversation
   end
 
@@ -11,7 +9,6 @@ class ChatChannel < ApplicationCable::Channel
   end
 
   def receive(data)
-    puts "\n\n\n\n\n\n\n\n\n\n #{data.inspect} \n\n\n\n\n\n\n\n\n\n\n"
     conversation = Conversation.find(data["conversation_id"])
     message = conversation.messages.create!(content: data["content"], user: current_user)
     broadcast_message(conversation, message)
@@ -20,10 +17,9 @@ class ChatChannel < ApplicationCable::Channel
   private
 
   def broadcast_message(conversation, message)
-    puts "\n\n\n\n\n\n\n\n\n\n #{conversation.inspect} \n\n\n\n\n\n\n\n\n\n\n"
-
     ChatChannel.broadcast_to(conversation, {
       content: message.content,
+      current_user_id: current_user.id,
       user: {
         id: message.user.id,
         username: message.user.username

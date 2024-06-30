@@ -7,7 +7,7 @@ class MessagesController < ApplicationController
     username = @message.user.fullname
     payload = {message: @message, current_user: current_user.id, message_user: @message.user_id}
     ChatChannel.broadcast_to(@conversation, payload)
-    redirect_to conversation_path(@conversation)
+    #this will broadcast to chat_channel.js where receive(data) will receive the data we send here. There it will be appended on the given element
   end
 
   private

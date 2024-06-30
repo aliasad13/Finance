@@ -1,32 +1,81 @@
 <div class="chat-box-container shadow-xl bg-base-200">
-  <!--  <h2>Conversation with <%#= @conversation.sender == current_user ? @conversation.receiver.username : @conversation.sender.username %></h2>-->
-
-  <div id="messages" class="chat-box">
+  <% if current_user == @conversation.sender  %>
+  <div class="conversation-header shadow-xl"><%= @conversation.receiver.fullname %></div>
+  <% else %>
+    <div class="conversation-header shadow-xl"><%= @conversation.sender.fullname %></div>
+    <% end %>
+    <div id="messages" class="chat-box">
     <%= render 'messages/message', local: {message: @messages} %>
   </div>
 
   <%= form_with model: [@conversation, @message], class: 'chat-form', id: 'chat-form', local: false do |form| %>
     <div class="chat-form-content">
-      <%= form.text_area :content, id: 'message_content', class: 'textarea textarea-bordered' %>
-    </div>
+      <% if current_user.theme == 'dark' %>
+      <%= form.text_area :content, id: 'message-content-dark', class: 'textarea textarea-bordered' %>
+    <% else %>
+        <%= form.text_area :content, id: 'message-content-light', class: 'textarea textarea-bordered' %>
+      <% end %>
+        </div>
   <% end %>
 
-  <div id="conversation-id" data-conversation-id="<%= @conversation.id %>"></div>
+  <div id="conversation-id" data-conversation-id="<%= @conversation.id %>" data-current-user-id="<%= current_user.id %>"></div>
 </div>
 
 <script>
+    function scrollToBottom() {
+        const messagesContainer = document.getElementById('messages');
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+    function fetchLastMessageUserId() {
+        const messageDivs = document.querySelectorAll('.chat');
+        if (messageDivs.length > 0) {
+            const lastMessageDiv = messageDivs[messageDivs.length - 1];
+            const lastMessageUserId = lastMessageDiv.getAttribute('data-user-id');
+            const currentUserId = document.getElementById('conversation-id').getAttribute('data-current-user-id');
+            if (lastMessageUserId === currentUserId) {
+                lastMessageDiv.classList.add('chat-end');
+            }
+            scrollToBottom();
+        }
+    }
+
+
     document.addEventListener('turbolinks:load', () => {
         const messageForm = document.getElementById('chat-form');
-        const messageContent = document.getElementById('message_content');
+        const messageContent = document.getElementById('message-content-dark') || document.getElementById('message-content-light') ;
+        const messagesContainer = document.getElementById('messages');
 
         if (messageForm && messageContent) {
             messageContent.addEventListener('keydown', function(event) {
                 if (event.key === 'Enter' && !event.shiftKey) {
                     event.preventDefault();
                     messageForm.submit();
+                    scrollToBottom();
+                    messageContent.value = ''
+                    const messageDivs = document.querySelectorAll('.chat');
                 }
             });
         }
+
+        // since we cannot create different styles for sender and receiver in the broadcast, I added a user id when the
+        // message is appended to the chat box by chat_channel.js. Then I used MutationObserver to fetch this user id whenever the div is created inside the
+        // div with id messages. it then checks if the user is current user and applied the style is so. The only way we can change the style is
+        // from the receiving end
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.addedNodes.length) {
+                    fetchLastMessageUserId(); // Fetch last message user ID when a new div is added
+                }
+            });
+        });
+
+        observer.observe(messagesContainer, { childList: true });
+
+        scrollToBottom();
+
     });
+
+    // Scroll to bottom when a new message is added
 
 </script>
